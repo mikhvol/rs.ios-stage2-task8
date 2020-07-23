@@ -18,7 +18,7 @@ RSSchool iOS, stage 2, task8
 3. Infinite scrolling (your UICollectionView should upload fresh portion of cats every time it reaches the end)
      1. visually indicate that you are in the process of loading data
 
-4. Detailed view. After clicking the cat in the UICollectionView “full” image should be opened new screen with modal presentaion. 
+4. Detailed view. After clicking the cat in the UICollectionView “full” image should be opened new screen with modal presentation. 
 
 5. User could save the image to the Galery.
 
