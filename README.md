@@ -8,7 +8,7 @@ RSSchool iOS, stage 2, task8
 ### Use this API: https://docs.thecatapi.com/ to implement the app with the following features:
 
 1. Add logic for passing Authentication (it should be possible to enter a API key "x-api-key")
-     1. if user enter a username and password, add logic to upload new images
+     1. if user enter a API key "x-api-key", add logic to upload new images
      2. the application should work without authorization also
 
 2. Ability to download and show cats in a list. (Use UICollectionView (Vertical layer))
