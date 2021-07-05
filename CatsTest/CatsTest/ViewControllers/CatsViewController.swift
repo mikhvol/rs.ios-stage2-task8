@@ -22,7 +22,7 @@ class CatsViewController: UIViewController {
         self.catsCollectionView.backgroundColor = .white
         self.catsCollectionView.delegate = self
         self.catsCollectionView.dataSource = self
-        self.catsCollectionView.register(catCell.self, forCellWithReuseIdentifier: catCell.identifier)
+        self.catsCollectionView.register(CatCell.self, forCellWithReuseIdentifier: CatCell.identifier)
         self.view.addSubview(self.catsCollectionView)
     }
     
@@ -51,22 +51,32 @@ extension CatsViewController: UICollectionViewDataSource, UICollectionViewDelega
         return self.cats.count
     }
     
+    
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let identifier = catCell.identifier
-        let cell = self.catsCollectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! catCell
+        let identifier = CatCell.identifier
+        let cell = self.catsCollectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! CatCell
         let imageUrl = self.cats[indexPath.row].imageUrl ?? "no url"
+        cell.representedIdentifier = imageUrl
         
         NetworkService.shared.downloadImageWithCache(url: imageUrl) {(image) in
-            cell.catImageView?.image = nil
-            cell.catImageView?.image = image
-            cell.layoutSubviews()
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double.random(in: 0...2)) {
+                if(cell.representedIdentifier == imageUrl) {
+                    cell.catImageView.image = nil
+                    cell.catImageView.image  = image
+                }
+            }
         }
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let edgeSize = (self.catsCollectionView.frame.size.width - 40) / 3
-        return CGSize(width: edgeSize, height: edgeSize)
+        let numberOfCellsInRow = 3
+        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+        let totalSpace = flowLayout.sectionInset.left
+            + flowLayout.sectionInset.right
+            + (flowLayout.minimumInteritemSpacing * CGFloat(numberOfCellsInRow - 1))
+        let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(numberOfCellsInRow))
+        return CGSize(width: size, height: size)
     }
 }
