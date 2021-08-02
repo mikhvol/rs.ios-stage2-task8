@@ -7,8 +7,8 @@ class CatsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCollectionView()
-        setupConstraints()
+        self.setupCollectionView()
+        self.setupConstraints()
         self.getCatBreeds()
         self.catsCollectionView.reloadData()
     }
@@ -51,22 +51,10 @@ extension CatsViewController: UICollectionViewDataSource, UICollectionViewDelega
         return self.cats.count
     }
     
-    
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let identifier = CatCell.identifier
         let cell = self.catsCollectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! CatCell
-        let imageUrl = self.cats[indexPath.row].imageUrl ?? "no url"
-        cell.representedIdentifier = imageUrl
-        
-        NetworkService.shared.downloadImageWithCache(url: imageUrl) {(image) in
-            DispatchQueue.main.asyncAfter(deadline: .now() + Double.random(in: 0...2)) {
-                if(cell.representedIdentifier == imageUrl) {
-                    cell.catImageView.image = nil
-                    cell.catImageView.image  = image
-                }
-            }
-        }
+        cell.configure(with: self.cats[indexPath.row])
         return cell
     }
     
@@ -78,5 +66,15 @@ extension CatsViewController: UICollectionViewDataSource, UICollectionViewDelega
             + (flowLayout.minimumInteritemSpacing * CGFloat(numberOfCellsInRow - 1))
         let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(numberOfCellsInRow))
         return CGSize(width: size, height: size)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, -500, 200, 0)
+        cell.layer.transform = rotationTransform
+        cell.alpha = 0
+        UIView.animate(withDuration: 0.75) {
+            cell.layer.transform = CATransform3DIdentity
+            cell.alpha = 1.0
+        }
     }
 }

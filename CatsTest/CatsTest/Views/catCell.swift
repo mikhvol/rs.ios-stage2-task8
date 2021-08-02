@@ -46,6 +46,24 @@ class CatCell: UICollectionViewCell {
                                      self.catImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor)])
     }
     
+    func configure(with cat: Cat) {
+        let imageUrl = cat.image?.url ?? "no url"
+        self.representedIdentifier = imageUrl
+        
+        NetworkService.shared.downloadImageWithCache(url: imageUrl) {(image) in
+            DispatchQueue.main.async {
+                if(self.representedIdentifier == imageUrl) {
+                    self.catImageView.image = nil
+                    self.catImageView.alpha = 0
+                    UIView.animate(withDuration: 0.65) {
+                        self.catImageView.alpha = 1
+                        self.catImageView.image  = image
+                    }
+                }
+            }
+        }
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         self.catImageView.image = UIImage(named: "cat.jpg")

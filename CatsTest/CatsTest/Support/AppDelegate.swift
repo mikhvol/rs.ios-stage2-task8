@@ -7,8 +7,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        let catsVC = CatsViewController()
-        self.window?.rootViewController = catsVC
+        let startVC = CatsViewController()
+        self.window?.rootViewController = startVC
         self.window?.makeKeyAndVisible()
         return true
     }

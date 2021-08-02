@@ -57,24 +57,10 @@ class NetworkService {
                 debugPrint(error.localizedDescription)
                 return
             }
-            
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { return }
             guard let data = data else { return }
-            
-            do {
-                guard let breeds = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [[String: Any]] else { return }
-                
-                for cat in breeds {
-                    let name = cat["name"] as? String ?? "No name found"
-                    let image = cat["image"] as? [String : Any] ?? ["No image" : "image not found"]
-                    let imageUrl = image["url"] as? String ?? "No url found"
-                    let cat = Cat(name: name, imageUrl: imageUrl)
-                    self.cats.append(cat)
-                }
-                completion(self.cats)
-            } catch {
-                debugPrint("JSON error: \(error.localizedDescription)")
-            }
+            guard let cats = try? JSONDecoder().decode([Cat].self, from: data) else { return }
+            completion(cats)
         }
         task.resume()
     }
