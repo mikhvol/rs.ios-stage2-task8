@@ -58,14 +58,11 @@ extension CatsViewController: UICollectionViewDataSource, UICollectionViewDelega
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let numberOfCellsInRow = 3
-        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
-        let totalSpace = flowLayout.sectionInset.left
-            + flowLayout.sectionInset.right
-            + (flowLayout.minimumInteritemSpacing * CGFloat(numberOfCellsInRow - 1))
-        let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(numberOfCellsInRow))
-        return CGSize(width: size, height: size)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let catsModalVC = CatsModalViewController()
+        catsModalVC.configureWith(cat: self.cats[indexPath.row])
+        catsModalVC.modalTransitionStyle = .coverVertical
+        self.present(catsModalVC, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -76,5 +73,15 @@ extension CatsViewController: UICollectionViewDataSource, UICollectionViewDelega
             cell.layer.transform = CATransform3DIdentity
             cell.alpha = 1.0
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let numberOfCellsInRow = 3
+        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+        let totalSpace = flowLayout.sectionInset.left
+            + flowLayout.sectionInset.right
+            + (flowLayout.minimumInteritemSpacing * CGFloat(numberOfCellsInRow - 1))
+        let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(numberOfCellsInRow))
+        return CGSize(width: size, height: size)
     }
 }

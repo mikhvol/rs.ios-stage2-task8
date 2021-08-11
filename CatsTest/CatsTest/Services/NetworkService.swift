@@ -64,4 +64,11 @@ class NetworkService {
         }
         task.resume()
     }
+    
+    func getCatImageFromCache(url: String, completion: @escaping (UIImage) -> ()) {
+        guard let url = URL(string: url) else { return }
+        if let cachedImage = self.imageCache.object(forKey: url.absoluteString as NSString) {
+                completion(cachedImage)
+        }
+    }
 }

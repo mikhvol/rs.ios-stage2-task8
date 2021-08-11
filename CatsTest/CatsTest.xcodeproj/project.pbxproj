@@ -13,6 +13,8 @@
 		F401FC8F265E9CF700F89C43 /* CatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F401FC8E265E9CF700F89C43 /* CatsViewController.swift */; };
 		F401FC92265EA65700F89C43 /* CatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F401FC91265EA65700F89C43 /* CatCell.swift */; };
 		F4386A5F266940EC00EE7249 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4386A5E266940EC00EE7249 /* NetworkService.swift */; };
+		F46A0D2526C14D2C0093426A /* CatsModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46A0D2426C14D2C0093426A /* CatsModalViewController.swift */; };
+		F46A0D2A26C338660093426A /* UIScrollView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46A0D2926C338660093426A /* UIScrollView+Ext.swift */; };
 		F4A4C35C269DEEE700A4B94B /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4C35B269DEEE700A4B94B /* StartViewController.swift */; };
 		F4A4C35F269DFBD900A4B94B /* AuthInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4C35E269DFBD900A4B94B /* AuthInfoView.swift */; };
 		F4D595CC26B8992300E556B1 /* Cat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D595CB26B8992300E556B1 /* Cat.swift */; };
@@ -27,6 +29,8 @@
 		F401FC8E265E9CF700F89C43 /* CatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsViewController.swift; sourceTree = "<group>"; };
 		F401FC91265EA65700F89C43 /* CatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatCell.swift; sourceTree = "<group>"; };
 		F4386A5E266940EC00EE7249 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		F46A0D2426C14D2C0093426A /* CatsModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsModalViewController.swift; sourceTree = "<group>"; };
+		F46A0D2926C338660093426A /* UIScrollView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Ext.swift"; sourceTree = "<group>"; };
 		F4A4C35B269DEEE700A4B94B /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		F4A4C35E269DFBD900A4B94B /* AuthInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInfoView.swift; sourceTree = "<group>"; };
 		F4D595CB26B8992300E556B1 /* Cat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cat.swift; sourceTree = "<group>"; };
@@ -66,6 +70,7 @@
 				F4374B64268D2289008442C8 /* Views */,
 				F4374B61268D220A008442C8 /* ViewControllers */,
 				F4374B67268D22CA008442C8 /* Services */,
+				F46A0D2826C337CA0093426A /* Extensions */,
 				F4374B65268D22A0008442C8 /* Support */,
 				F401FC7F265E9BFB00F89C43 /* Assets.xcassets */,
 				F401FC81265E9BFB00F89C43 /* LaunchScreen.storyboard */,
@@ -78,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				F401FC8E265E9CF700F89C43 /* CatsViewController.swift */,
+				F46A0D2426C14D2C0093426A /* CatsModalViewController.swift */,
 				F4A4C35B269DEEE700A4B94B /* StartViewController.swift */,
 			);
 			path = ViewControllers;
@@ -114,6 +120,14 @@
 				F4386A5E266940EC00EE7249 /* NetworkService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		F46A0D2826C337CA0093426A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F46A0D2926C338660093426A /* UIScrollView+Ext.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,6 +206,8 @@
 				F401FC8F265E9CF700F89C43 /* CatsViewController.swift in Sources */,
 				F4A4C35C269DEEE700A4B94B /* StartViewController.swift in Sources */,
 				F4D595CC26B8992300E556B1 /* Cat.swift in Sources */,
+				F46A0D2526C14D2C0093426A /* CatsModalViewController.swift in Sources */,
+				F46A0D2A26C338660093426A /* UIScrollView+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
