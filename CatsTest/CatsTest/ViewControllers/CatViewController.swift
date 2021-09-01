@@ -1,19 +1,21 @@
 import UIKit
 
-class CatsViewController: UIViewController {
+class CatViewController: UIViewController {
     
-    var catsCollectionView: UICollectionView!
-    var cats = [Cat]()
+    var cats = [CatModel]()
     
+    private var catsCollectionView: UICollectionView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupCollectionView()
         self.setupConstraints()
-        self.getCatBreeds()
+        self.getCats()
         self.catsCollectionView.reloadData()
     }
     
-    func setupCollectionView() {
+    //MARK:- Setup CollectionView & Constraints
+    private func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
         layout.itemSize = CGSize(width: 80, height: 80)
@@ -26,7 +28,7 @@ class CatsViewController: UIViewController {
         self.view.addSubview(self.catsCollectionView)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         NSLayoutConstraint.activate([self.catsCollectionView.heightAnchor.constraint(equalTo: self.view.heightAnchor),
                                      self.catsCollectionView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
                                      self.catsCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
@@ -34,10 +36,14 @@ class CatsViewController: UIViewController {
     }
     
     //MARK:- Fetching data
-    
-    func getCatBreeds() {
-        NetworkService.shared.getCatBreeds {(cats) in
-            self.cats = cats
+    private func getCats() {
+        NetworkService.shared.getCats {(cats) in
+            
+            cats.forEach { (cat) in
+                let catModel = CatModel(with: cat)
+                self.cats.append(catModel)
+            }
+            
             DispatchQueue.main.async {
                 self.catsCollectionView.reloadData()
             }
@@ -45,7 +51,8 @@ class CatsViewController: UIViewController {
     }
 }
 
-extension CatsViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+//MARK:- Extensions for UI
+extension CatViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.cats.count
@@ -55,14 +62,15 @@ extension CatsViewController: UICollectionViewDataSource, UICollectionViewDelega
         let identifier = CatCell.identifier
         let cell = self.catsCollectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! CatCell
         cell.configure(with: self.cats[indexPath.row])
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let catsModalVC = CatsModalViewController()
-        catsModalVC.configureWith(cat: self.cats[indexPath.row])
-        catsModalVC.modalTransitionStyle = .coverVertical
-        self.present(catsModalVC, animated: true)
+        let catModel = self.cats[indexPath.row]
+        let catModalVC = CatModalViewController(with: catModel)
+        catModalVC.modalTransitionStyle = .coverVertical
+        self.present(catModalVC, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -83,5 +91,12 @@ extension CatsViewController: UICollectionViewDataSource, UICollectionViewDelega
             + (flowLayout.minimumInteritemSpacing * CGFloat(numberOfCellsInRow - 1))
         let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(numberOfCellsInRow))
         return CGSize(width: size, height: size)
+    }
+}
+
+//MARK:- Extension for model delegate
+extension CatViewController: CatDelegate {
+    func changeStateFavoriteLabel() {
+        print(self.cats)
     }
 }

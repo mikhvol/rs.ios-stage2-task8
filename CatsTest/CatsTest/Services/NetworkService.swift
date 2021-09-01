@@ -5,7 +5,7 @@ class NetworkService {
     let catApiBaseUrl = "https://api.thecatapi.com"
     let apiKey = "55c2df8b-09bb-4576-aec6-92ed7fafaa2d"
     var imageCache = NSCache<NSString, UIImage>()
-    var cats = [Cat]()
+    var cats = [CatJSONModel]()
     
     static let shared = NetworkService()
     
@@ -45,7 +45,7 @@ class NetworkService {
         }
     }
     
-    func getCatBreeds(completion: @escaping ([Cat]) -> ()) {
+    func getCats(completion: @escaping ([CatJSONModel]) -> ()) {
         
         guard let url = URL(string: catApiBaseUrl + "/v1/breeds") else { return }
         var urlRequest = URLRequest(url: url)
@@ -59,7 +59,7 @@ class NetworkService {
             }
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { return }
             guard let data = data else { return }
-            guard let cats = try? JSONDecoder().decode([Cat].self, from: data) else { return }
+            guard let cats = try? JSONDecoder().decode([CatJSONModel].self, from: data) else { return }
             completion(cats)
         }
         task.resume()

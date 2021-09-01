@@ -1,13 +1,4 @@
-//
-//  Cat2.swift
-//  CatsTest
-//
-//  Created by worker on 03.08.2021.
-//
-
-import Foundation
-
-struct Cat: Codable {
+struct CatJSONModel: Codable {
     var adaptability : Int?
     var affection_level : Int?
     var alt_names : String?
@@ -24,7 +15,7 @@ struct Cat: Codable {
     var health_issues : Int?
     var hypoallergenic : Int?
     var id : String?
-    var image : CatImage?
+    var image : CatJSONImage?
     var indoor : Int?
     var intelligence : Int?
     var lap : Int?
@@ -44,18 +35,18 @@ struct Cat: Codable {
     var vcahospitals_url : String?
     var vetstreet_url : String?
     var vocalisation : Int?
-    var weight : CatWeight?
+    var weight : CatJSONWeight?
     var wikipedia_url : String?
 }
 
-struct CatImage: Codable {
+struct CatJSONImage: Codable {
     var height : Int?
     var id : String?
     var url : String?
     var width : Int?
 }
 
-struct CatWeight: Codable {
+struct CatJSONWeight: Codable {
     var imperial : String?
     var metric : String?
 }
