@@ -1,6 +1,6 @@
 import UIKit
 
-class CatStartViewController: UIViewController {
+final class CatStartViewController: UIViewController {
     
     private var portraitConstraints: [NSLayoutConstraint]!
     private var landscapeConstraints: [NSLayoutConstraint]!
@@ -144,5 +144,9 @@ class CatStartViewController: UIViewController {
         catsTabBarVC.modalPresentationStyle = .fullScreen
         catsTabBarVC.modalTransitionStyle = .flipHorizontal
         self.present(catsTabBarVC, animated: true)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }

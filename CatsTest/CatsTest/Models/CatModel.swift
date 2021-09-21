@@ -1,11 +1,11 @@
 import UIKit
 
-class CatModel {
+final class CatModel {
     var name = "defaultName"
     var description = "defaultDescription"
     var origin = "defaultCountry"
     var JSONimage = CatJSONImage()
-    var image: UIImage! = nil
+    var image: UIImage! = UIImage(named: "cat.jpg")
     var isFavorite = false
     
     init(with catJSONModel: CatJSONModel) {

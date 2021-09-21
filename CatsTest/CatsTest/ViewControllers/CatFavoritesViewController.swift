@@ -1,17 +1,31 @@
 import UIKit
 
-class CatFavoritesViewController: UIViewController {
+final class CatFavoritesViewController: UIViewController {
     
-    var cats = [CatModel]()
+    private var cats = [CatModel]()
     
     private var catsCollectionView: UICollectionView!
+    
+    private var lastIndexPath: IndexPath!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupCollectionView()
         self.setupConstraints()
-        //self.getCats()
         self.catsCollectionView.reloadData()
+    }
+    
+    func getCats() {
+        self.cats = CatDataManager.shared.cats.filter({ $0.isFavorite == true })
+        
+        DispatchQueue.main.async {
+            self.catsCollectionView.reloadData()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.getCats()
     }
     
     //MARK:- Setup CollectionView & Constraints
@@ -38,12 +52,14 @@ class CatFavoritesViewController: UIViewController {
 
 extension CatFavoritesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return self.cats.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let identifier = CatCell.identifier
         let cell = self.catsCollectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! CatCell
+        let catModel = self.cats[indexPath.row]
+        cell.configure(with: catModel)
         
         return cell
     }
@@ -56,5 +72,20 @@ extension CatFavoritesViewController: UICollectionViewDataSource, UICollectionVi
             + (flowLayout.minimumInteritemSpacing * CGFloat(numberOfCellsInRow - 1))
         let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(numberOfCellsInRow))
         return CGSize(width: size, height: size)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let catModel = self.cats[indexPath.row]
+        let catModalVC = CatModalViewController(with: catModel)
+        catModalVC.delegate = self
+        self.lastIndexPath = indexPath
+        catModalVC.modalTransitionStyle = .coverVertical
+        self.present(catModalVC, animated: true)
+    }
+}
+
+extension CatFavoritesViewController: CatDelegate {
+    func changeStateFavoriteLabel() {
+        self.getCats()
     }
 }

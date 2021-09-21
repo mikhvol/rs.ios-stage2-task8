@@ -1,8 +1,9 @@
 import UIKit
 
-class CatModalViewController: UIViewController {
+final class CatModalViewController: UIViewController {
     
     private var cat: CatModel?
+    
     var delegate: CatDelegate?
     
     private var descriptionTextView: UITextView! {
@@ -153,8 +154,6 @@ class CatModalViewController: UIViewController {
         guard let cat = self.cat else { return }
         cat.isFavorite.toggle()
         self.updateTitleForButton()
-        
-        self.delegate = CatViewController()
         self.delegate?.changeStateFavoriteLabel()
     }
 }

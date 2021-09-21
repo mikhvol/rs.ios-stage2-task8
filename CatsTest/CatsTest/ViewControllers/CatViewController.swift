@@ -1,17 +1,25 @@
 import UIKit
 
-class CatViewController: UIViewController {
+final class CatViewController: UIViewController {
     
     var cats = [CatModel]()
-    
-    private var catsCollectionView: UICollectionView!
 
+    private var catsCollectionView: UICollectionView!
+    private var lastContentOffset: CGFloat = 0
+    private var lastIndexPath: IndexPath!
+    private var scrollDown = false
+    
+    //MARK:- LifeCycle ViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupCollectionView()
         self.setupConstraints()
-        self.getCats()
         self.catsCollectionView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.getCats()
     }
     
     //MARK:- Setup CollectionView & Constraints
@@ -36,44 +44,16 @@ class CatViewController: UIViewController {
     }
     
     //MARK:- Fetching data
-    private func getCats() {
-        NetworkService.shared.getCats {(cats) in
-            
-            cats.forEach { (cat) in
-                let catModel = CatModel(with: cat)
-                self.cats.append(catModel)
-            }
-            
-            DispatchQueue.main.async {
-                self.catsCollectionView.reloadData()
-            }
+    private func getCats() {  
+        self.cats = CatDataManager.shared.cats
+        
+        DispatchQueue.main.async {
+            self.catsCollectionView.reloadData()
         }
     }
-}
 
-//MARK:- Extensions for UI
-extension CatViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.cats.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let identifier = CatCell.identifier
-        let cell = self.catsCollectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! CatCell
-        cell.configure(with: self.cats[indexPath.row])
-        
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let catModel = self.cats[indexPath.row]
-        let catModalVC = CatModalViewController(with: catModel)
-        catModalVC.modalTransitionStyle = .coverVertical
-        self.present(catModalVC, animated: true)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    //MARK:- Animation
+    private func animateCollection(cell: UICollectionViewCell) {
         let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, -500, 200, 0)
         cell.layer.transform = rotationTransform
         cell.alpha = 0
@@ -82,7 +62,41 @@ extension CatViewController: UICollectionViewDataSource, UICollectionViewDelegat
             cell.alpha = 1.0
         }
     }
+}
+
+//MARK:- Extensions for UI
+extension CatViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.cats.count
+    }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let identifier = CatCell.identifier
+        let cell = self.catsCollectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! CatCell
+        let cat = self.cats[indexPath.row]
+        cell.configure(with: cat)
+        return cell
+    }
+}
+
+extension CatViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let catModel = self.cats[indexPath.row]
+        let catModalVC = CatModalViewController(with: catModel)
+        catModalVC.delegate = self
+        self.lastIndexPath = indexPath
+        catModalVC.modalTransitionStyle = .coverVertical
+        self.present(catModalVC, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if self.scrollDown {
+            self.animateCollection(cell: cell)
+        }
+    }
+}
+
+extension CatViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let numberOfCellsInRow = 3
         let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
@@ -94,9 +108,23 @@ extension CatViewController: UICollectionViewDataSource, UICollectionViewDelegat
     }
 }
 
+extension CatViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (self.lastContentOffset > scrollView.contentOffset.y) {
+            self.scrollDown = false
+        }
+        else if (self.lastContentOffset < scrollView.contentOffset.y) {
+            self.scrollDown = true
+        }
+        self.lastContentOffset = scrollView.contentOffset.y
+    }
+}
+
 //MARK:- Extension for model delegate
 extension CatViewController: CatDelegate {
     func changeStateFavoriteLabel() {
-        print(self.cats)
+        self.catsCollectionView.performBatchUpdates {
+            self.catsCollectionView.reloadItems(at: [self.lastIndexPath])
+        }
     }
 }

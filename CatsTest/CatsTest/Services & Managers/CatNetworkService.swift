@@ -1,13 +1,13 @@
 import Foundation
 import UIKit
 
-class NetworkService {
+final class CatNetworkService {
     let catApiBaseUrl = "https://api.thecatapi.com"
     let apiKey = "55c2df8b-09bb-4576-aec6-92ed7fafaa2d"
     var imageCache = NSCache<NSString, UIImage>()
     var cats = [CatJSONModel]()
     
-    static let shared = NetworkService()
+    static let shared = CatNetworkService()
     
     private init() {}
     
@@ -32,10 +32,11 @@ class NetworkService {
                 }
                 
                 DispatchQueue.global().async { [weak self] in
+                    guard let self = self else { return }
                     guard let data = data else { return }
                     guard let image = UIImage(data: data) else { return }
                     
-                    self?.imageCache.setObject(image, forKey: url.absoluteString as NSString)
+                    self.imageCache.setObject(image, forKey: url.absoluteString as NSString)
                     DispatchQueue.main.async {
                         completion(image)
                     }
@@ -63,12 +64,5 @@ class NetworkService {
             completion(cats)
         }
         task.resume()
-    }
-    
-    func getCatImageFromCache(url: String, completion: @escaping (UIImage) -> ()) {
-        guard let url = URL(string: url) else { return }
-        if let cachedImage = self.imageCache.object(forKey: url.absoluteString as NSString) {
-                completion(cachedImage)
-        }
     }
 }

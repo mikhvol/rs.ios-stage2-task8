@@ -1,6 +1,6 @@
 import UIKit
 
-class CatTabBarController: UITabBarController {
+final class CatTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

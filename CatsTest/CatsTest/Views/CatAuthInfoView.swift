@@ -1,6 +1,6 @@
 import UIKit
 
-class CatAuthInfoView: UIView {
+final class CatAuthInfoView: UIView {
     
     private var apiKeyField: UITextField! {
         didSet {
@@ -29,6 +29,7 @@ class CatAuthInfoView: UIView {
     //MARK:- Setup Views & Constraints
     private func setupViews() {
         self.apiKeyField = UITextField()
+        self.apiKeyField.delegate = self
         self.addSubview(self.apiKeyField)
     }
     
@@ -38,5 +39,13 @@ class CatAuthInfoView: UIView {
                                      self.apiKeyField.centerXAnchor.constraint(equalTo: self.centerXAnchor),
                                      self.apiKeyField.topAnchor.constraint(equalTo: self.topAnchor, constant: 0)
         ])
+    }
+}
+
+//MARK:- Delegates
+extension CatAuthInfoView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.apiKeyField.resignFirstResponder()
+        return true
     }
 }

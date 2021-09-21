@@ -14,13 +14,14 @@
 		F401FC92265EA65700F89C43 /* CatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F401FC91265EA65700F89C43 /* CatCell.swift */; };
 		F41E328D26CA7F9800CA2187 /* CatFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41E328C26CA7F9800CA2187 /* CatFavoritesViewController.swift */; };
 		F41E329026CABAEF00CA2187 /* CatTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41E328F26CABAEF00CA2187 /* CatTabBarController.swift */; };
-		F4386A5F266940EC00EE7249 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4386A5E266940EC00EE7249 /* NetworkService.swift */; };
+		F4386A5F266940EC00EE7249 /* CatNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4386A5E266940EC00EE7249 /* CatNetworkService.swift */; };
 		F43E3A6D26DCF977002824B0 /* CatDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43E3A6C26DCF977002824B0 /* CatDelegate.swift */; };
 		F46A0D2526C14D2C0093426A /* CatModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46A0D2426C14D2C0093426A /* CatModalViewController.swift */; };
 		F46A0D2A26C338660093426A /* UIScrollView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46A0D2926C338660093426A /* UIScrollView+Ext.swift */; };
 		F4A4C35C269DEEE700A4B94B /* CatStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4C35B269DEEE700A4B94B /* CatStartViewController.swift */; };
 		F4A4C35F269DFBD900A4B94B /* CatAuthInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4C35E269DFBD900A4B94B /* CatAuthInfoView.swift */; };
 		F4D595CC26B8992300E556B1 /* CatJSONModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D595CB26B8992300E556B1 /* CatJSONModel.swift */; };
+		F4D7BDE026E6B856001E36C8 /* CatDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D7BDDF26E6B856001E36C8 /* CatDataManager.swift */; };
 		F4E76A5626CD56FC005E6B57 /* CatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E76A5526CD56FC005E6B57 /* CatModel.swift */; };
 		F4E76A6026D00E23005E6B57 /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E76A5F26D00E23005E6B57 /* UIButton+Ext.swift */; };
 		F4E76A6326D016E6005E6B57 /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E76A6226D016E6005E6B57 /* UIImageView+Ext.swift */; };
@@ -36,13 +37,14 @@
 		F401FC91265EA65700F89C43 /* CatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatCell.swift; sourceTree = "<group>"; };
 		F41E328C26CA7F9800CA2187 /* CatFavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatFavoritesViewController.swift; sourceTree = "<group>"; };
 		F41E328F26CABAEF00CA2187 /* CatTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatTabBarController.swift; sourceTree = "<group>"; };
-		F4386A5E266940EC00EE7249 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		F4386A5E266940EC00EE7249 /* CatNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatNetworkService.swift; sourceTree = "<group>"; };
 		F43E3A6C26DCF977002824B0 /* CatDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatDelegate.swift; sourceTree = "<group>"; };
 		F46A0D2426C14D2C0093426A /* CatModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatModalViewController.swift; sourceTree = "<group>"; };
 		F46A0D2926C338660093426A /* UIScrollView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Ext.swift"; sourceTree = "<group>"; };
 		F4A4C35B269DEEE700A4B94B /* CatStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatStartViewController.swift; sourceTree = "<group>"; };
 		F4A4C35E269DFBD900A4B94B /* CatAuthInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatAuthInfoView.swift; sourceTree = "<group>"; };
 		F4D595CB26B8992300E556B1 /* CatJSONModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatJSONModel.swift; sourceTree = "<group>"; };
+		F4D7BDDF26E6B856001E36C8 /* CatDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatDataManager.swift; sourceTree = "<group>"; };
 		F4E76A5526CD56FC005E6B57 /* CatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatModel.swift; sourceTree = "<group>"; };
 		F4E76A5F26D00E23005E6B57 /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
 		F4E76A6226D016E6005E6B57 /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
@@ -82,7 +84,7 @@
 				F4374B64268D2289008442C8 /* Views */,
 				F4374B61268D220A008442C8 /* ViewControllers */,
 				F43E3A6B26DCF935002824B0 /* Protocols */,
-				F4374B67268D22CA008442C8 /* Services */,
+				F4374B67268D22CA008442C8 /* Services & Managers */,
 				F46A0D2826C337CA0093426A /* Extensions */,
 				F4374B65268D22A0008442C8 /* Support */,
 				F401FC7F265E9BFB00F89C43 /* Assets.xcassets */,
@@ -130,12 +132,13 @@
 			path = Support;
 			sourceTree = "<group>";
 		};
-		F4374B67268D22CA008442C8 /* Services */ = {
+		F4374B67268D22CA008442C8 /* Services & Managers */ = {
 			isa = PBXGroup;
 			children = (
-				F4386A5E266940EC00EE7249 /* NetworkService.swift */,
+				F4386A5E266940EC00EE7249 /* CatNetworkService.swift */,
+				F4D7BDDF26E6B856001E36C8 /* CatDataManager.swift */,
 			);
-			path = Services;
+			path = "Services & Managers";
 			sourceTree = "<group>";
 		};
 		F43E3A6B26DCF935002824B0 /* Protocols */ = {
@@ -229,9 +232,10 @@
 				F4E76A5626CD56FC005E6B57 /* CatModel.swift in Sources */,
 				F4A4C35F269DFBD900A4B94B /* CatAuthInfoView.swift in Sources */,
 				F401FC92265EA65700F89C43 /* CatCell.swift in Sources */,
-				F4386A5F266940EC00EE7249 /* NetworkService.swift in Sources */,
+				F4386A5F266940EC00EE7249 /* CatNetworkService.swift in Sources */,
 				F401FC8F265E9CF700F89C43 /* CatViewController.swift in Sources */,
 				F4E76A6326D016E6005E6B57 /* UIImageView+Ext.swift in Sources */,
+				F4D7BDE026E6B856001E36C8 /* CatDataManager.swift in Sources */,
 				F4A4C35C269DEEE700A4B94B /* CatStartViewController.swift in Sources */,
 				F41E329026CABAEF00CA2187 /* CatTabBarController.swift in Sources */,
 				F4D595CC26B8992300E556B1 /* CatJSONModel.swift in Sources */,

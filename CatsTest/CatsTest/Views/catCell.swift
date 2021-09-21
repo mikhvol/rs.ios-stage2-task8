@@ -1,11 +1,15 @@
 import UIKit
 
-class CatCell: UICollectionViewCell {
+final class CatCell: UICollectionViewCell {
     
     static var identifier = "catCell"
     private var representedIdentifier: String = ""
     
-    var cat: CatModel!
+    var cat: CatModel! {
+        didSet {
+            self.catFavoriteLabel.isHidden = !self.cat.isFavorite
+        }
+    }
     
     private var catImageView: UIImageView! {
         didSet {
@@ -85,17 +89,15 @@ class CatCell: UICollectionViewCell {
         guard let imageUrl = URL(string: url) else { return }
         self.representedIdentifier = imageUrl.absoluteString
         
-        NetworkService.shared.downloadImageWithCache(url: imageUrl.absoluteString) { (image) in
-            DispatchQueue.global().async {
-                self.cat.image = image
-                DispatchQueue.main.async {
-                    if(self.representedIdentifier == imageUrl.absoluteString) {
-                        self.catImageView.image = nil
-                        self.catImageView.alpha = 0
-                        UIView.animate(withDuration: 0.65) {
-                            self.catImageView.alpha = 1
-                            self.catImageView.image = self.cat.image
-                        }
+        CatNetworkService.shared.downloadImageWithCache(url: imageUrl.absoluteString) { (image) in
+            DispatchQueue.main.async {
+                if(self.representedIdentifier == imageUrl.absoluteString) {
+                    self.cat.image = image
+                    self.catImageView.image = nil
+                    self.catImageView.alpha = 0
+                    UIView.animate(withDuration: 0.65) {
+                        self.catImageView.alpha = 1
+                        self.catImageView.image = self.cat.image
                     }
                 }
             }
