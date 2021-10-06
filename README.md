@@ -8,6 +8,10 @@ RSSchool iOS, stage 2, task8
 ![cats3](https://user-images.githubusercontent.com/61166305/136290112-d14b0012-38ca-44dd-98f0-8760f8271e5d.png)
 ![cats4](https://user-images.githubusercontent.com/61166305/136290149-4ce75c49-6c4c-4bdd-bbb6-b05a23bf3d89.png)
 
+## Work in progress:
+- Migrate to MVP Pattern
+- Implementation CoreData for saving states Favorite VC
+
 ## Details Task
 ![Cat's API](https://cdn2.thecatapi.com/logos/thecatapi_256xW.png)
 
