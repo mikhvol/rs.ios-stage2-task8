@@ -79,6 +79,7 @@ final class CatModalViewController: UIViewController {
         self.view.backgroundColor = .white
         self.setupViews()
         self.setupConstraints()
+        //getImageFromCoreData()
         self.updateUIdata()
     }
     
@@ -153,7 +154,29 @@ final class CatModalViewController: UIViewController {
     @objc private func favoriteButtonTapped() {
         guard let cat = self.cat else { return }
         cat.isFavorite.toggle()
+        if cat.isFavorite {
+            self.saveToGallery()
+        }
         self.updateTitleForButton()
         self.delegate?.changeStateFavoriteLabel()
+    }
+    
+    //MARK:- Save data
+    
+    func saveToGallery() {
+        guard let image = self.catImageView.image else { return }
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(ac, animated: true)
+        } else {
+            let ac = UIAlertController(title: "Saved!", message: "Your image has been saved to your photos.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(ac, animated: true)
+        }
     }
 }

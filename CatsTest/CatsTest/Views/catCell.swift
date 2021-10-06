@@ -104,3 +104,16 @@ final class CatCell: UICollectionViewCell {
         }
     }
 }
+
+//MARK:- Extensions
+extension CatCell {
+    func animate() {
+        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, -500, 200, 0)
+        self.layer.transform = rotationTransform
+        self.alpha = 0
+        UIView.animate(withDuration: 0.75) {
+            self.layer.transform = CATransform3DIdentity
+            self.alpha = 1.0
+        }
+    }
+}

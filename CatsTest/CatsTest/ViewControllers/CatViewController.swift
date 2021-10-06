@@ -51,17 +51,6 @@ final class CatViewController: UIViewController {
             self.catsCollectionView.reloadData()
         }
     }
-
-    //MARK:- Animation
-    private func animateCollection(cell: UICollectionViewCell) {
-        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, -500, 200, 0)
-        cell.layer.transform = rotationTransform
-        cell.alpha = 0
-        UIView.animate(withDuration: 0.75) {
-            cell.layer.transform = CATransform3DIdentity
-            cell.alpha = 1.0
-        }
-    }
 }
 
 //MARK:- Extensions for UI
@@ -91,7 +80,8 @@ extension CatViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if self.scrollDown {
-            self.animateCollection(cell: cell)
+            guard let catCell = cell as? CatCell else { return }
+            catCell.animate()
         }
     }
 }

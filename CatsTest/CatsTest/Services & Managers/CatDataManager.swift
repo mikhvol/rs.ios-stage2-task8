@@ -1,10 +1,3 @@
-//
-//  DataService.swift
-//  CatsTest
-//
-//  Created by worker on 06.09.2021.
-//
-
 import Foundation
 
 final class CatDataManager {

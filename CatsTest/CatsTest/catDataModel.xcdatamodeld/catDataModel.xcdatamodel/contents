@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CatGallery" representedClassName="CatGallery" syncable="YES">
+        <attribute name="savedCatImage" optional="YES" attributeType="Binary"/>
+    </entity>
+    <elements>
+        <element name="CatGallery" positionX="-54" positionY="-9" width="128" height="58"/>
+    </elements>
+</model>
