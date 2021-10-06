@@ -1,9 +1,18 @@
 # rs.ios-stage2-task8
 RSSchool iOS, stage 2, task8
 
+### My Solution
+
+![cats1](https://user-images.githubusercontent.com/61166305/136290102-b2ae14a8-5c14-43cd-8c78-512bf2d382b6.png)
+![cats2](https://user-images.githubusercontent.com/61166305/136290104-e88a8bf3-79b2-4983-85b5-4eee7d26cfd0.png)
+![cats3](https://user-images.githubusercontent.com/61166305/136290112-d14b0012-38ca-44dd-98f0-8760f8271e5d.png)
+![cats4](https://user-images.githubusercontent.com/61166305/136290149-4ce75c49-6c4c-4bdd-bbb6-b05a23bf3d89.png)
+
+## Details Task
 ![Cat's API](https://cdn2.thecatapi.com/logos/thecatapi_256xW.png)
 
 ### Downloading and saving cats!
+
 
 ### Use this API: https://docs.thecatapi.com/ to implement the app with the following features:
 
